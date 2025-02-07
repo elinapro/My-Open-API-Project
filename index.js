@@ -6,8 +6,8 @@
 // console.log("imagesList: ", imagesList);
 //  Saved URL with API Key:
 // "https://api.thedogapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=live_Zb0masTqwCatZiNQPfY7dP7sz4KFao4TEOOIKXaNQDVpieJN1O0DeszDKCYen87L"
-function get_random() {
-  fetch("https://api.thedogapi.com/v1/images/search?limit=8") //9 images
+function get_dogs() {
+  fetch("https://api.thedogapi.com/v1/images/search?limit=8") //10 random images
     .then((response) => {
       if (!response.ok) {
         throw new Error("Request failed");
@@ -15,8 +15,8 @@ function get_random() {
       return response.json(); // Parse the response as JSON
     })
     .then(function (data) {
-      let imgTagz = data.map(create_image);
-      imgTagz.forEach(display_images);
+      let dogElements = data.map(create_dog);
+      dogElements.forEach(display_images);
     })
     .catch((error) => {
       console.error("An error occurred:", error);
@@ -24,13 +24,22 @@ function get_random() {
 }
 
 //Create an image tag
-function create_image(imageData) {
+function create_dog(imageData) {
+  let button = document.createElement("button");
   let imgTag = document.createElement("img");
   imgTag.classList.add("dog-image");
   imgTag.setAttribute("src", imageData.url);
   //   imgTag.setAttribute("width", "300");
   imgTag.setAttribute("id", imageData.id);
-  return imgTag;
+  button.appendChild(imgTag);
+  button.addEventListener("click", () => {
+    //save dog id in variable
+    //fetch the dog by id
+    //select the elements inside the modal, place dog data inside
+
+    show_banner();
+  });
+  return button;
 }
 
 // //loop through the images array
@@ -45,26 +54,40 @@ function display_images(imageTag) {
 
 //building the banner panel for the 2nd fetch
 const banner = document.querySelector("#info-panel");
+console.log(banner);
 
-function display_panel() {
-  if (banner.classList.contains("invisible")) {
-    banner.classList.remove("invisible");
-    banner.classList.add("visible");
-  } else {
-    banner.classList.remove("visible");
-    banner.classList.add("invisible");
-  }
-  // banner.classList.add("visible");
-  // banner.classList.remove("visible");
+function show_banner() {
+  banner.classList.remove("hidden");
 }
 
-//Create a click event handler to send you to the dog data
+function hide_banner() {
+  banner.classList.add("hidden");
+}
 
-fetch("https://api.thedogapi.com/v1/images/search?size=small").then(
-  (response) => {
-    return response.json();
-  }
-);
+//   if (banner.classList.contains("invisible")) {
+//     banner.classList.remove("invisible");
+//     banner.classList.add("visible");
+//   } else {
+//     banner.classList.remove("visible");
+//     banner.classList.add("invisible");
+//   }
+// banner.classList.add("visible");
+// banner.classList.remove("visible");
+
+//clean up button code- unused
+//make sure the modal displays/ doesnt display based on a class we add/remove
+//when the modal displays, we display and entire HTML element over the screen that grays everything out
+
+//1.save the dogs id, 2. fetch that dog & display it in the modal when you click that button
+//  3. add an X button that closes it
+//make a div that covers the entire screen- make it display/ not display
+//to dismiss the modal, have an X or clickout- add an onclick to the overlay
+//when you click on the dog, keep track of which dog, add the ID to a JS variable
+//depending on ID, create a new fetch with that ID
+//that fetch will load the dogs info into the modal
+//wrapping the dog elements in a button, button should display modal (button = click)
+//as we load the dogs, wrap in achor tag
+//each anchor tag would have a URL that goes to an ID for that dog
 
 // async function myAPIFunction() {
 //   let apiKey = "123456";
@@ -77,9 +100,6 @@ fetch("https://api.thedogapi.com/v1/images/search?size=small").then(
 
 // /*----------------------------- Event Listeners -----------------------------*/
 
-let buttonElement = document.getElementById("button1");
-buttonElement.addEventListener("click", display_panel);
-
 //Add to the DOM, load images on page load
-document.addEventListener("DOMContentLoaded", get_random);
-document.addEventListener("DOMContentLoaded", display_panel);
+document.addEventListener("DOMContentLoaded", get_dogs);
+// document.addEventListener("DOMContentLoaded", display_panel);
