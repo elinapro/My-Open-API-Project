@@ -24,22 +24,34 @@ The next page will display just one large image of a randomly selected dog breed
 
   <body>
     <main>
-      <h1>Which dog personality are you?</h1>
+      <h1>Which kind of dog are you?</h1>
       <br />
-      <section id="images">
-        <!-- the JS should insert the 9 random dog images into the list -->
-        <ul></ul>
+      <p align="center">
+        Have you ever wondered what type of dog you're most like? With our
+        <br />
+        advanced mind-reading technology, our site can help you determine the
+        <br />
+        answer with just one click of a button! (and a short fetch API
+        endpoint).
+        <p></p>
+        <br />So what are you waiting for? Click below to find out!
+      </p>
+      <section id="image-container">
+        <!-- the JS should insert the 9 random dog images  -->
       </section>
       <h3><br />Click below to find out!</h3>
 
-      <!-- <div id = "parent1">
-        <div class="childB"></div>
-        <div class="childB"></div>
-        <div class="childB"></div>
-    </div> -->
+      <div id="info-panel" class="invisible">
+            <div id="dog details"></div>
+      </div>
+
 
       <button id="button1">Woof woof</button>
+      <!-- pop-up list of info -->
     </main>
+    <section id="info-panel">
+      <ul></ul>
+    </section>
     <!-- <nav class="navigation">
       <div class="nav-element"><a href="#images">images</a></div>
     </nav> -->

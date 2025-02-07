@@ -3,7 +3,7 @@ body {
 }
 
 main {
-  background-color: beige;
+  background-color: rgb(245, 245, 220);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -12,11 +12,48 @@ main {
   padding: 20px;
   border-radius: 1px;
   border: 1px solid forestgreen;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
-#dogs {
+#image-container {
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  flex-direction: row;
+  width: 906px;
+  height: auto;
+  border: 1px solid rgb(224, 14, 84);
+  flex-wrap: wrap;
+  padding: 0px;
 }
+
+.dog-image {
+  height: 300px;
+  width: 300px;
+  border: 1px solid greenyellow;
+}
+
+#info-panel {
+  height: 500px;
+  width: 500px;
+  position: absolute;
+  background-color: rgb(42, 133, 106);
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  opacity: 0.9;
+}
+/* 
+.visible {
+  display: block;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.invisible {
+  display: none;
+} */
