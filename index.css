@@ -34,6 +34,12 @@ main {
   /* border: 1px solid greenyellow; */
 }
 
+.dog-image-modal {
+  height: auto;
+  width: 100%;
+  /* border: 1px solid greenyellow; */
+}
+
 .banner-overlay {
   /* display: none; */
   position: fixed;
@@ -47,7 +53,7 @@ main {
 }
 
 #info-panel {
-  height: 500px;
+  height: auto;
   width: 400px;
   position: absolute;
   background-color: rgb(164, 246, 221);

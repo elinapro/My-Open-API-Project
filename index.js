@@ -69,7 +69,7 @@ function create_dog_banner(imageData) {
   let dogTemper = document.createElement("p");
   let lifeSpan = document.createElement("p");
 
-  imgTag.classList.add("dog-image");
+  imgTag.classList.add("dog-image-modal");
   imgTag.setAttribute("src", imageData.url);
   //   imgTag.setAttribute("width", "300");
   imgTag.setAttribute("id", imageData.id);
@@ -78,6 +78,9 @@ function create_dog_banner(imageData) {
     dogTemper.innerText = imageData.breeds[0].temperament;
     lifeSpan.innerHTML =
       "<b>Typical life span: </b>" + imageData.breeds[0].life_span;
+  } else {
+    dogBreed.innerHTML =
+      "This is an unknown doggie! <br>Breed data is not available.";
   }
   div.appendChild(dogBreed);
   div.appendChild(imgTag);
