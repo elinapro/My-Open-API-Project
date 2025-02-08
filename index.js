@@ -1,4 +1,8 @@
 //if you name the section banner, move it forward or back with z-index
+const banner = document.querySelector("#info-panel");
+console.log(banner);
+
+// const bannerOverlay = document.getElementById("banner-overlay");
 
 //add the class
 
@@ -53,8 +57,6 @@ function display_images(imageTag) {
 }
 
 //building the banner panel for the 2nd fetch
-const banner = document.querySelector("#info-panel");
-console.log(banner);
 
 function show_banner() {
   banner.classList.remove("hidden");
@@ -74,8 +76,6 @@ function hide_banner() {
 // banner.classList.add("visible");
 // banner.classList.remove("visible");
 
-//clean up button code- unused
-//make sure the modal displays/ doesnt display based on a class we add/remove
 //when the modal displays, we display and entire HTML element over the screen that grays everything out
 
 //1.save the dogs id, 2. fetch that dog & display it in the modal when you click that button
@@ -103,3 +103,10 @@ function hide_banner() {
 //Add to the DOM, load images on page load
 document.addEventListener("DOMContentLoaded", get_dogs);
 // document.addEventListener("DOMContentLoaded", display_panel);
+
+// closing the modal outside the modal
+window.addEventListener("click", function (event) {
+  if (event.target === banner) {
+    banner.style.display = "none";
+  }
+});
