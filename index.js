@@ -1,17 +1,18 @@
 //if you name the section banner, move it forward or back with z-index
 const banner = document.querySelector("#info-panel");
-console.log(banner);
 
-// const bannerOverlay = document.getElementById("banner-overlay");
+// if using button
+const closeModal = document.getElementById("closeModal");
 
-//add the class
+//overlay
+const bannerOverlay = document.getElementById("banner-overlay");
 
 // const imageList = imagesSection.querySelector("ul");
 // console.log("imagesList: ", imagesList);
 //  Saved URL with API Key:
 // "https://api.thedogapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=live_Zb0masTqwCatZiNQPfY7dP7sz4KFao4TEOOIKXaNQDVpieJN1O0DeszDKCYen87L"
 function get_dogs() {
-  fetch("https://api.thedogapi.com/v1/images/search?limit=8") //10 random images
+  fetch("https://api.thedogapi.com/v1/images/search?limit=10") //10 random images
     .then((response) => {
       if (!response.ok) {
         throw new Error("Request failed");
@@ -19,7 +20,7 @@ function get_dogs() {
       return response.json(); // Parse the response as JSON
     })
     .then(function (data) {
-      let dogElements = data.map(create_dog);
+      let dogElements = data.slice(0, 9).map(create_dog);
       dogElements.forEach(display_images);
     })
     .catch((error) => {
@@ -37,13 +38,52 @@ function create_dog(imageData) {
   imgTag.setAttribute("id", imageData.id);
   button.appendChild(imgTag);
   button.addEventListener("click", () => {
-    //save dog id in variable
-    //fetch the dog by id
-    //select the elements inside the modal, place dog data inside
-
     show_banner();
+    get_dog(imageData.id);
   });
   return button;
+}
+
+function get_dog(id) {
+  fetch(`https://api.thedogapi.com/v1/images/${id}?include_breeds=true`) //10 random images
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+      return response.json(); // Parse the response as JSON
+    })
+    .then(function (data) {
+      const dog = create_dog_banner(data);
+      document.getElementById("dog-details").appendChild(dog);
+    })
+    .catch((error) => {
+      console.error("An error occurred:", error);
+    });
+}
+
+//creates dog details in the modal
+function create_dog_banner(imageData) {
+  let dogBreed = document.createElement("h2");
+  let imgTag = document.createElement("img");
+  let div = document.createElement("div");
+  let dogTemper = document.createElement("p");
+  let lifeSpan = document.createElement("p");
+
+  imgTag.classList.add("dog-image");
+  imgTag.setAttribute("src", imageData.url);
+  //   imgTag.setAttribute("width", "300");
+  imgTag.setAttribute("id", imageData.id);
+  if (imageData.breeds !== undefined) {
+    dogBreed.innerText = "This doggie is a " + imageData.breeds[0].name;
+    dogTemper.innerText = imageData.breeds[0].temperament;
+    lifeSpan.innerHTML =
+      "<b>Typical life span: </b>" + imageData.breeds[0].life_span;
+  }
+  div.appendChild(dogBreed);
+  div.appendChild(imgTag);
+  div.appendChild(dogTemper);
+  div.appendChild(lifeSpan);
+  return div;
 }
 
 // //loop through the images array
@@ -56,14 +96,15 @@ function display_images(imageTag) {
   images.appendChild(imageTag);
 }
 
-//building the banner panel for the 2nd fetch
-
+// banner modal for the 2nd fetch
 function show_banner() {
+  bannerOverlay.classList.remove("hidden");
   banner.classList.remove("hidden");
 }
-
 function hide_banner() {
+  bannerOverlay.classList.add("hidden");
   banner.classList.add("hidden");
+  document.getElementById("dog-details").innerHTML = "";
 }
 
 //   if (banner.classList.contains("invisible")) {
@@ -104,9 +145,16 @@ function hide_banner() {
 document.addEventListener("DOMContentLoaded", get_dogs);
 // document.addEventListener("DOMContentLoaded", display_panel);
 
-// closing the modal outside the modal
-window.addEventListener("click", function (event) {
-  if (event.target === banner) {
-    banner.style.display = "none";
-  }
+// closing the modal
+closeModal.addEventListener("click", function (event) {
+  hide_banner();
+  // banner.style.display = "none";
 });
+
+bannerOverlay.addEventListener("click", function (event) {
+  hide_banner();
+});
+// // Close modal when close button is clicked
+// closeModal.addEventListener("click", function () {
+//   modal.style.display = "none";
+// });

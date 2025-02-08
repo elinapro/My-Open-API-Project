@@ -29,9 +29,9 @@ The next page will display just one large image of a randomly selected dog breed
       <p align="center">
         Have you ever wondered what type of dog you're most like? With our
         <br />
-        advanced mind-reading technology, our site can help you determine the
+        advanced technology, our site can help you determine the stats
         <br />
-        answer with just one click of a button! (and a short fetch API
+        with just one click of a button! (and a short fetch API
         endpoint).
         <p></p>
         <br />So what are you waiting for? Click below to find out!
@@ -39,20 +39,20 @@ The next page will display just one large image of a randomly selected dog breed
       <section id="image-container">
         <!-- the JS should insert the 9 random dog images  -->
       </section>
-      <h3><br />Click below to find out!</h3>
+      <h3><br />Click on any dog to find out more about them.</h3>
+
+      <div id="banner-overlay" class="banner-overlay hidden">
+        </div>
 
       <div id="info-panel" class="hidden">
-            <div id="banner-overlay" class="banner-overlay">
-                <span id="close" class="close">&times;</span>
+                <span id="closeModal" class="close">&times;</span>
             <h1 id="dog-title">Learn about this doggie!</h1>
             <div id="dog-details"></div>
-        </div>
-    
       </div>
       <!-- add the overlay to surround the modal  -->
 
-
-      <button id="button1">Woof woof</button>
+<!-- 
+      <button id="button1">Woof woof</button> -->
       <!-- pop-up list of info -->
     </main>
     <!-- <nav class="navigation">
