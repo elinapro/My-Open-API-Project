@@ -1,18 +1,15 @@
-//if you name the section banner, move it forward or back with z-index
+//references to page elements
 const banner = document.querySelector("#info-panel");
-
-// if using button
-const closeModal = document.getElementById("closeModal");
-
-//overlay
 const bannerOverlay = document.getElementById("banner-overlay");
 
-// const imageList = imagesSection.querySelector("ul");
-// console.log("imagesList: ", imagesList);
-//  Saved URL with API Key:
-// "https://api.thedogapi.com/v1/images/search?limit=10&breed_ids=beng&api_key=live_Zb0masTqwCatZiNQPfY7dP7sz4KFao4TEOOIKXaNQDVpieJN1O0DeszDKCYen87L"
+//  API Key:
+// live_Zb0masTqwCatZiNQPfY7dP7sz4KFao4TEOOIKXaNQDVpieJN1O0DeszDKCYen87L
+
+//1st fetch to call 9 random dog images from the Dog API
+//note: the limit in this url isn't respected by the API
+
 function get_dogs() {
-  fetch("https://api.thedogapi.com/v1/images/search?limit=10") //10 random images
+  fetch("https://api.thedogapi.com/v1/images/search?limit=9") //9 random images
     .then((response) => {
       if (!response.ok) {
         throw new Error("Request failed");
@@ -20,7 +17,7 @@ function get_dogs() {
       return response.json(); // Parse the response as JSON
     })
     .then(function (data) {
-      let dogElements = data.slice(0, 9).map(create_dog);
+      let dogElements = data.slice(0, 9).map(create_dog); //using first 9 images
       dogElements.forEach(display_images);
     })
     .catch((error) => {
@@ -28,13 +25,12 @@ function get_dogs() {
     });
 }
 
-//Create an image tag
+//Creates an image tag for each dog
 function create_dog(imageData) {
   let button = document.createElement("button");
   let imgTag = document.createElement("img");
   imgTag.classList.add("dog-image");
   imgTag.setAttribute("src", imageData.url);
-  //   imgTag.setAttribute("width", "300");
   imgTag.setAttribute("id", imageData.id);
   button.appendChild(imgTag);
   button.addEventListener("click", () => {
@@ -44,8 +40,9 @@ function create_dog(imageData) {
   return button;
 }
 
+//2nd fetch to request dog data about a selected image
 function get_dog(id) {
-  fetch(`https://api.thedogapi.com/v1/images/${id}?include_breeds=true`) //10 random images
+  fetch(`https://api.thedogapi.com/v1/images/${id}?include_breeds=true`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Request failed");
@@ -89,75 +86,37 @@ function create_dog_banner(imageData) {
   return div;
 }
 
-// //loop through the images array
-// for (let i = 0; i < images.length; i++) {
-//   const image = images[i].url;
-
-//display the images
+//displays the 9 images grid for the 1st fetch
 function display_images(imageTag) {
   let images = document.getElementById("image-container");
   images.appendChild(imageTag);
 }
 
-// banner modal for the 2nd fetch
+// shows the modal for the 2nd fetch
 function show_banner() {
   bannerOverlay.classList.remove("hidden");
   banner.classList.remove("hidden");
 }
+
+//hides the modal
 function hide_banner() {
   bannerOverlay.classList.add("hidden");
   banner.classList.add("hidden");
   document.getElementById("dog-details").innerHTML = "";
 }
 
-//   if (banner.classList.contains("invisible")) {
-//     banner.classList.remove("invisible");
-//     banner.classList.add("visible");
-//   } else {
-//     banner.classList.remove("visible");
-//     banner.classList.add("invisible");
-//   }
-// banner.classList.add("visible");
-// banner.classList.remove("visible");
-
-//when the modal displays, we display and entire HTML element over the screen that grays everything out
-
-//1.save the dogs id, 2. fetch that dog & display it in the modal when you click that button
-//  3. add an X button that closes it
-//make a div that covers the entire screen- make it display/ not display
-//to dismiss the modal, have an X or clickout- add an onclick to the overlay
-//when you click on the dog, keep track of which dog, add the ID to a JS variable
-//depending on ID, create a new fetch with that ID
-//that fetch will load the dogs info into the modal
-//wrapping the dog elements in a button, button should display modal (button = click)
-//as we load the dogs, wrap in achor tag
-//each anchor tag would have a URL that goes to an ID for that dog
-
-// async function myAPIFunction() {
-//   let apiKey = "123456";
-//   let input = "Han Solo";
-
-//   let response = await axios.get(
-//     `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${input}&days=7&aqi=no&alerts=no`
-//   );
-// }
-
 // /*----------------------------- Event Listeners -----------------------------*/
 
 //Add to the DOM, load images on page load
 document.addEventListener("DOMContentLoaded", get_dogs);
-// document.addEventListener("DOMContentLoaded", display_panel);
 
-// closing the modal
+// closing the modal using the X
+const closeModal = document.getElementById("closeModal");
 closeModal.addEventListener("click", function (event) {
   hide_banner();
-  // banner.style.display = "none";
 });
 
+//closing the modal by clicking outside of it on the overlay
 bannerOverlay.addEventListener("click", function (event) {
   hide_banner();
 });
-// // Close modal when close button is clicked
-// closeModal.addEventListener("click", function () {
-//   modal.style.display = "none";
-// });

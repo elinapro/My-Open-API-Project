@@ -49,7 +49,7 @@ main {
   height: 100%;
   background-color: rgba(48, 47, 47, 0.7);
   /* z-index: -1000; */
-  /* cursor: pointer; */
+  cursor: pointer;
 }
 
 #info-panel {
@@ -69,11 +69,11 @@ main {
 /* if using the close button  */
 .close {
   position: absolute;
-  top: 10px;
+  top: 1px;
   right: 10px;
-  font-size: 30px;
+  font-size: 40px;
   cursor: pointer;
-  color: aliceblue;
+  color: rgb(201, 20, 20);
 }
 
 .hidden {
