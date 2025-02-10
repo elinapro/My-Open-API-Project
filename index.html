@@ -18,25 +18,51 @@
     />
   </head>
 
+  <!-- This page will display a random fetch of 9 small images (in a box shape) of dog breeds
+When you click the "Woof woof" button below, the user will be re-directed to another page
+The next page will display just one large image of a randomly selected dog breed -->
+
   <body>
-    <h1>Which dog personality are you?</h1>
-    <br />
-    <h3>
-      Answer the following questions to determine which dog breed is perfect for
-      you!
-    </h3>
+    <main>
+      <h1>Which kind of dog is best for you?</h1>
+      <br />
+      <p align="center">
+        Have you ever wondered what type of dog you like? With our
+        <br />
+        advanced technology, our site can help you determine the stats
+        <br />
+        with just one click of a button! (and a quick fetch API endpoint).
+      </p>
+      <section id="image-container">
+        <!-- the JS should insert the 9 random dog images here  -->
+      </section>
+      <h3><br />Click on any dog to find out more about them!</h3>
 
-    <div id="parent1">
-      <div class="childA"></div>
-      <div class="childA"></div>
-      <div class="childA"></div>
-    </div>
-    <!-- <div id = "parent2">
-        <div class="childB"></div>
-        <div class="childB"></div>
-        <div class="childB"></div>
-    </div> -->
+      <div
+        id="banner-overlay"
+        class="banner-overlay hidden"
+      ></div>
 
-    <button id="button1">Fly button</button>
+      <div
+        id="info-panel"
+        class="hidden"
+      >
+        <span
+          id="closeModal"
+          class="close"
+          >&times;</span
+        >
+        <h1 id="dog-title">Learn about this doggie!</h1>
+        <div id="dog-details"></div>
+      </div>
+      <!-- add the overlay to surround the modal  -->
+
+      <!-- 
+      <button id="button1">Woof woof</button> -->
+      <!-- pop-up list of info -->
+    </main>
+    <!-- <nav class="navigation">
+      <div class="nav-element"><a href="#images">images</a></div>
+    </nav> -->
   </body>
 </html>
