@@ -79,3 +79,31 @@ main {
 .hidden {
   display: none;
 }
+
+/* My responsive design settings: */
+
+/* only fits 2 photos per page - ipad */
+
+@media (max- width: 600px) {
+  image-container {
+    max-width: 50%;
+  }
+
+  h1 {
+    font-size: 80%;
+    color: rgb(18, 122, 175);
+  }
+}
+
+/* only fits 1 photo per page - iphone */
+
+@media (max-width: 300px) {
+  image-container {
+    max-width: 25%;
+  }
+
+  h1 {
+    font-size: 70%;
+    color: rgb(26, 124, 55);
+  }
+}
